@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.romanscad.management</groupId>
+    <artifactId>client-management-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Client Management - Parent</name>
+    <description>Projet multi-module pour la gestion des clients et groupes (Jakarta EE 11 / WildFly 41)</description>
+
+    <modules>
+        <module>client-management-core</module>
+        <module>client-management-soap</module>
+        <module>client-management-soap-cli</module>
+        <module>client-management-rest</module>
+        <module>client-management-rest-cli</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jakarta.ee.version>11.0.0</jakarta.ee.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spécification Jakarta EE 11 globale (fournie par WildFly) -->
+            <dependency>
+                <groupId>jakarta.platform</groupId>
+                <artifactId>jakarta.jakartaee-api</artifactId>
+                <version>${jakarta.ee.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Module Core interne -->
+            <dependency>
+                <groupId>com.romanscad.management</groupId>
+                <artifactId>client-management-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                    <configuration>
+                        <release>21</release>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.4.0</version>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
