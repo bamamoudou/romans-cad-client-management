@@ -3,35 +3,33 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
-        <groupId>com.romanscad.management</groupId>
+        <groupId>com.romanscad.clientmanagement</groupId>
         <artifactId>client-management-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>client-management-rest</artifactId>
     <packaging>war</packaging>
+    <name>Client Management - Passerelle REST (étape 3)</name>
 
-    <name>Client Management - REST Layer</name>
-
+    <!-- Pas de dépendance vers core : la passerelle ne connaît QUE le contrat SOAP. -->
     <dependencies>
-        <dependency>
-            <groupId>com.romanscad.management</groupId>
-            <artifactId>client-management-core</artifactId>
-        </dependency>
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jakarta.xml.ws</groupId>
+            <artifactId>jakarta.xml.ws-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-            </plugin>
-        </plugins>
+        <finalName>client-management-rest</finalName>
     </build>
 </project>

@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.romanscad.management</groupId>
+    <!-- POM parent : centralise les versions et la configuration commune.
+         Les modules enfants ne déclarent AUCUNE version (principe DRY). -->
+    <groupId>com.romanscad.clientmanagement</groupId>
     <artifactId>client-management-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-
     <name>Client Management - Parent</name>
-    <description>Projet multi-module pour la gestion des clients et groupes (Jakarta EE 11 / WildFly 41)</description>
 
     <modules>
         <module>client-management-core</module>
@@ -21,15 +21,36 @@
     </modules>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 'release' (et non source/target) garantit l'usage de l'API Java 21 -->
+        <maven.compiler.release>21</maven.compiler.release>
+
+        <!-- Versions des dépendances -->
         <jakarta.ee.version>11.0.0</jakarta.ee.version>
+        <!-- Retirées de la plateforme EE 11 mais toujours fournies par WildFly 41 -->
+        <jakarta.xml.ws.version>4.0.2</jakarta.xml.ws.version>
+        <jakarta.jws.version>3.0.0</jakarta.jws.version>
+        <jakarta.xml.bind.version>4.0.2</jakarta.xml.bind.version>
+        <junit.version>5.11.4</junit.version>
+
+        <!-- Versions des plugins -->
+        <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
+        <maven.war.plugin.version>3.4.0</maven.war.plugin.version>
+        <maven.jar.plugin.version>3.4.2</maven.jar.plugin.version>
+        <maven.surefire.plugin.version>3.5.2</maven.surefire.plugin.version>
+        <maven.enforcer.plugin.version>3.5.0</maven.enforcer.plugin.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <!-- Spécification Jakarta EE 11 globale (fournie par WildFly) -->
+            <!-- Module interne partagé -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>client-management-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Jakarta EE 11 : scope provided, WildFly fournit l'implémentation -->
             <dependency>
                 <groupId>jakarta.platform</groupId>
                 <artifactId>jakarta.jakartaee-api</artifactId>
@@ -37,11 +58,32 @@
                 <scope>provided</scope>
             </dependency>
 
-            <!-- Module Core interne -->
+            <!-- JAX-WS / JAXB : hors du jakartaee-api 11, à déclarer séparément -->
             <dependency>
-                <groupId>com.romanscad.management</groupId>
-                <artifactId>client-management-core</artifactId>
-                <version>${project.version}</version>
+                <groupId>jakarta.xml.ws</groupId>
+                <artifactId>jakarta.xml.ws-api</artifactId>
+                <version>${jakarta.xml.ws.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.jws</groupId>
+                <artifactId>jakarta.jws-api</artifactId>
+                <version>${jakarta.jws.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.xml.bind</groupId>
+                <artifactId>jakarta.xml.bind-api</artifactId>
+                <version>${jakarta.xml.bind.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -50,22 +92,45 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.13.0</version>
-                    <configuration>
-                        <release>21</release>
-                    </configuration>
+                    <version>${maven.compiler.plugin.version}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
-                    <version>3.4.0</version>
+                    <version>${maven.war.plugin.version}</version>
                     <configuration>
+                        <!-- Pas de web.xml : tout passe par les annotations -->
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven.jar.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.plugin.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
+
+        <plugins>
+            <!-- Échoue tôt et clairement si le JDK ou Maven sont trop anciens -->
+            <plugin>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven.enforcer.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals><goal>enforce</goal></goals>
+                        <configuration>
+                            <rules>
+                                <requireJavaVersion><version>[21,)</version></requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>
