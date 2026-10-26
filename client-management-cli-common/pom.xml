@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.romanscad.clientmanagement</groupId>
+        <artifactId>client-management-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>client-management-cli-common</artifactId>
+    <packaging>jar</packaging>
+    <name>Client Management - Moteur de ligne de commande (commun aux deux clients)</name>
+
+    <dependencies>
+        <!-- Uniquement le contrat : domaine, pagination, exceptions et interfaces de service -->
+        <dependency>
+            <groupId>com.romanscad.clientmanagement</groupId>
+            <artifactId>client-management-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

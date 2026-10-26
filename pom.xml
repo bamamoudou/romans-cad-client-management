@@ -14,6 +14,7 @@
 
     <modules>
         <module>client-management-core</module>
+        <module>client-management-cli-common</module>
         <module>client-management-soap</module>
         <module>client-management-soap-cli</module>
         <module>client-management-rest</module>
@@ -47,6 +48,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>client-management-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>client-management-cli-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
