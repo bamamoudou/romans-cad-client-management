@@ -2,7 +2,6 @@ package com.romanscad.clientmanagement.cli.soap.generated;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
 
 
@@ -16,7 +15,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="removed" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         <element name="removed" type="{http://www.w3.org/2001/XMLSchema}int" form="qualified"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>
@@ -31,7 +30,6 @@ import jakarta.xml.bind.annotation.XmlType;
 })
 public class RemoveCustomersFromGroupResponse {
 
-    @XmlElement(namespace = "")
     protected int removed;
 
     /**

@@ -11,7 +11,7 @@
   <xs:element name="listCustomersResponse" type="tns:listCustomersResponse"/>
   <xs:complexType name="deleteCustomer">
     <xs:sequence>
-      <xs:element name="customerId" type="xs:long"/>
+      <xs:element form="qualified" name="customerId" type="xs:long"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="deleteCustomerResponse">
@@ -26,13 +26,13 @@
   </xs:complexType>
   <xs:complexType name="listCustomers">
     <xs:sequence>
-      <xs:element minOccurs="0" name="afterId" type="xs:long"/>
-      <xs:element minOccurs="0" name="limit" type="xs:int"/>
+      <xs:element form="qualified" minOccurs="0" name="afterId" type="xs:long"/>
+      <xs:element form="qualified" minOccurs="0" name="limit" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listCustomersResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="page" type="tns:CustomerPage"/>
+      <xs:element form="qualified" minOccurs="0" name="page" type="tns:CustomerPage"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="CustomerPage">
@@ -51,24 +51,24 @@
   </xs:complexType>
   <xs:complexType name="getCustomer">
     <xs:sequence>
-      <xs:element name="customerId" type="xs:long"/>
+      <xs:element form="qualified" name="customerId" type="xs:long"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="getCustomerResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="customer" type="tns:Customer"/>
+      <xs:element form="qualified" minOccurs="0" name="customer" type="tns:Customer"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="createCustomer">
     <xs:sequence>
-      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
-      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
-      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="lastName" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="email" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="createCustomerResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="customer" type="tns:Customer"/>
+      <xs:element form="qualified" minOccurs="0" name="customer" type="tns:Customer"/>
     </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="ErrorCode">

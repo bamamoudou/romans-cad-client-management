@@ -15,8 +15,8 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0" form="qualified"/>
+ *         <element name="description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0" form="qualified"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>

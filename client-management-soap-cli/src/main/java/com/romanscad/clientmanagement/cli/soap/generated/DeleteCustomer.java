@@ -15,7 +15,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="customerId" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         <element name="customerId" type="{http://www.w3.org/2001/XMLSchema}long" form="qualified"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>

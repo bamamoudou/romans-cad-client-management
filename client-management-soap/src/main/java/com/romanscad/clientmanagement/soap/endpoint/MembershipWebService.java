@@ -38,50 +38,50 @@ public class MembershipWebService {
 
     /** @return le nombre d'associations réellement créées (les clients déjà membres sont ignorés) */
     @WebMethod
-    @WebResult(name = "added")
+    @WebResult(name = "added", targetNamespace = SoapContract.NAMESPACE)
     public int addCustomersToGroup(
-            @WebParam(name = "groupId") long groupId,
-            @WebParam(name = "customerId") List<Long> customerIds) throws ClientManagementFault {
+            @WebParam(name = "groupId", targetNamespace = SoapContract.NAMESPACE) long groupId,
+            @WebParam(name = "customerId", targetNamespace = SoapContract.NAMESPACE) List<Long> customerIds) throws ClientManagementFault {
         return SoapCalls.call(() ->
                 membershipService.addCustomersToGroup(groupId, requireWithinBatchLimit(customerIds)));
     }
 
     /** @return le nombre d'associations réellement supprimées */
     @WebMethod
-    @WebResult(name = "removed")
+    @WebResult(name = "removed", targetNamespace = SoapContract.NAMESPACE)
     public int removeCustomersFromGroup(
-            @WebParam(name = "groupId") long groupId,
-            @WebParam(name = "customerId") List<Long> customerIds) throws ClientManagementFault {
+            @WebParam(name = "groupId", targetNamespace = SoapContract.NAMESPACE) long groupId,
+            @WebParam(name = "customerId", targetNamespace = SoapContract.NAMESPACE) List<Long> customerIds) throws ClientManagementFault {
         return SoapCalls.call(() ->
                 membershipService.removeCustomersFromGroup(groupId, requireWithinBatchLimit(customerIds)));
     }
 
     @WebMethod
-    @WebResult(name = "page")
+    @WebResult(name = "page", targetNamespace = SoapContract.NAMESPACE)
     public CustomerPageDto listCustomersOfGroup(
-            @WebParam(name = "groupId") long groupId,
-            @WebParam(name = "afterId") Long afterId,
-            @WebParam(name = "limit") Integer limit) throws ClientManagementFault {
+            @WebParam(name = "groupId", targetNamespace = SoapContract.NAMESPACE) long groupId,
+            @WebParam(name = "afterId", targetNamespace = SoapContract.NAMESPACE) Long afterId,
+            @WebParam(name = "limit", targetNamespace = SoapContract.NAMESPACE) Integer limit) throws ClientManagementFault {
         return SoapCalls.call(() -> DtoMapper.toCustomerPage(
                 membershipService.listCustomersOfGroup(groupId, DtoMapper.toPageRequest(afterId, limit))));
     }
 
     @WebMethod
-    @WebResult(name = "page")
+    @WebResult(name = "page", targetNamespace = SoapContract.NAMESPACE)
     public GroupPageDto listGroupsOfCustomer(
-            @WebParam(name = "customerId") long customerId,
-            @WebParam(name = "afterId") Long afterId,
-            @WebParam(name = "limit") Integer limit) throws ClientManagementFault {
+            @WebParam(name = "customerId", targetNamespace = SoapContract.NAMESPACE) long customerId,
+            @WebParam(name = "afterId", targetNamespace = SoapContract.NAMESPACE) Long afterId,
+            @WebParam(name = "limit", targetNamespace = SoapContract.NAMESPACE) Integer limit) throws ClientManagementFault {
         return SoapCalls.call(() -> DtoMapper.toGroupPage(
                 membershipService.listGroupsOfCustomer(customerId, DtoMapper.toPageRequest(afterId, limit))));
     }
 
     /** Vue « clients et groupes associés » : la pagination porte sur les clients. */
     @WebMethod
-    @WebResult(name = "page")
+    @WebResult(name = "page", targetNamespace = SoapContract.NAMESPACE)
     public CustomerWithGroupsPageDto listCustomersWithGroups(
-            @WebParam(name = "afterId") Long afterId,
-            @WebParam(name = "limit") Integer limit) throws ClientManagementFault {
+            @WebParam(name = "afterId", targetNamespace = SoapContract.NAMESPACE) Long afterId,
+            @WebParam(name = "limit", targetNamespace = SoapContract.NAMESPACE) Integer limit) throws ClientManagementFault {
         return SoapCalls.call(() -> DtoMapper.toCustomerWithGroupsPage(
                 membershipService.listCustomersWithGroups(DtoMapper.toPageRequest(afterId, limit))));
     }

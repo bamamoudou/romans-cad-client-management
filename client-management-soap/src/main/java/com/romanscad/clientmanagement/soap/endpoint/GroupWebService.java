@@ -27,32 +27,32 @@ public class GroupWebService {
     private GroupService groupService;
 
     @WebMethod
-    @WebResult(name = "group")
+    @WebResult(name = "group", targetNamespace = SoapContract.NAMESPACE)
     public GroupDto createGroup(
-            @WebParam(name = "name") String name,
-            @WebParam(name = "description") String description) throws ClientManagementFault {
+            @WebParam(name = "name", targetNamespace = SoapContract.NAMESPACE) String name,
+            @WebParam(name = "description", targetNamespace = SoapContract.NAMESPACE) String description) throws ClientManagementFault {
         return SoapCalls.call(() -> DtoMapper.toGroupDto(groupService.createGroup(name, description)));
     }
 
     @WebMethod
-    @WebResult(name = "group")
+    @WebResult(name = "group", targetNamespace = SoapContract.NAMESPACE)
     public GroupDto getGroup(
-            @WebParam(name = "groupId") long groupId) throws ClientManagementFault {
+            @WebParam(name = "groupId", targetNamespace = SoapContract.NAMESPACE) long groupId) throws ClientManagementFault {
         return SoapCalls.call(() -> DtoMapper.toGroupDto(groupService.getGroup(groupId)));
     }
 
     @WebMethod
     public void deleteGroup(
-            @WebParam(name = "groupId") long groupId) throws ClientManagementFault {
+            @WebParam(name = "groupId", targetNamespace = SoapContract.NAMESPACE) long groupId) throws ClientManagementFault {
         SoapCalls.run(() -> groupService.deleteGroup(groupId));
     }
 
     /** Pagination par curseur : afterId et limit sont facultatifs (première page, 100 éléments). */
     @WebMethod
-    @WebResult(name = "page")
+    @WebResult(name = "page", targetNamespace = SoapContract.NAMESPACE)
     public GroupPageDto listGroups(
-            @WebParam(name = "afterId") Long afterId,
-            @WebParam(name = "limit") Integer limit) throws ClientManagementFault {
+            @WebParam(name = "afterId", targetNamespace = SoapContract.NAMESPACE) Long afterId,
+            @WebParam(name = "limit", targetNamespace = SoapContract.NAMESPACE) Integer limit) throws ClientManagementFault {
         return SoapCalls.call(() ->
                 DtoMapper.toGroupPage(groupService.listGroups(DtoMapper.toPageRequest(afterId, limit))));
     }

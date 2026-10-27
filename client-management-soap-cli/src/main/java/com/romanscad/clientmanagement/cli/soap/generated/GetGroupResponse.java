@@ -15,7 +15,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="group" type="{http://clientmanagement.romanscad.com/v1}Group" minOccurs="0"/>
+ *         <element name="group" type="{http://clientmanagement.romanscad.com/v1}Group" minOccurs="0" form="qualified"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>

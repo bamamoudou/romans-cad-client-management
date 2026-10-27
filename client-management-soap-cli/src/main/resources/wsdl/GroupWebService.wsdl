@@ -11,13 +11,13 @@
   <xs:element name="listGroupsResponse" type="tns:listGroupsResponse"/>
   <xs:complexType name="createGroup">
     <xs:sequence>
-      <xs:element minOccurs="0" name="name" type="xs:string"/>
-      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="name" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="description" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="createGroupResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="group" type="tns:Group"/>
+      <xs:element form="qualified" minOccurs="0" name="group" type="tns:Group"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="Group">
@@ -36,7 +36,7 @@
   </xs:complexType>
   <xs:complexType name="deleteGroup">
     <xs:sequence>
-      <xs:element name="groupId" type="xs:long"/>
+      <xs:element form="qualified" name="groupId" type="xs:long"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="deleteGroupResponse">
@@ -44,13 +44,13 @@
   </xs:complexType>
   <xs:complexType name="listGroups">
     <xs:sequence>
-      <xs:element minOccurs="0" name="afterId" type="xs:long"/>
-      <xs:element minOccurs="0" name="limit" type="xs:int"/>
+      <xs:element form="qualified" minOccurs="0" name="afterId" type="xs:long"/>
+      <xs:element form="qualified" minOccurs="0" name="limit" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listGroupsResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="page" type="tns:GroupPage"/>
+      <xs:element form="qualified" minOccurs="0" name="page" type="tns:GroupPage"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="GroupPage">
@@ -61,12 +61,12 @@
   </xs:complexType>
   <xs:complexType name="getGroup">
     <xs:sequence>
-      <xs:element name="groupId" type="xs:long"/>
+      <xs:element form="qualified" name="groupId" type="xs:long"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="getGroupResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="group" type="tns:Group"/>
+      <xs:element form="qualified" minOccurs="0" name="group" type="tns:Group"/>
     </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="ErrorCode">

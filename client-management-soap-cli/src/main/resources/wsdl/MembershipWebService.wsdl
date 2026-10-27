@@ -13,13 +13,13 @@
   <xs:element name="removeCustomersFromGroupResponse" type="tns:removeCustomersFromGroupResponse"/>
   <xs:complexType name="listCustomersWithGroups">
     <xs:sequence>
-      <xs:element minOccurs="0" name="afterId" type="xs:long"/>
-      <xs:element minOccurs="0" name="limit" type="xs:int"/>
+      <xs:element form="qualified" minOccurs="0" name="afterId" type="xs:long"/>
+      <xs:element form="qualified" minOccurs="0" name="limit" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listCustomersWithGroupsResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="page" type="tns:CustomerWithGroupsPage"/>
+      <xs:element form="qualified" minOccurs="0" name="page" type="tns:CustomerWithGroupsPage"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="CustomerWithGroupsPage">
@@ -58,14 +58,14 @@
   </xs:complexType>
   <xs:complexType name="listCustomersOfGroup">
     <xs:sequence>
-      <xs:element name="groupId" type="xs:long"/>
-      <xs:element minOccurs="0" name="afterId" type="xs:long"/>
-      <xs:element minOccurs="0" name="limit" type="xs:int"/>
+      <xs:element form="qualified" name="groupId" type="xs:long"/>
+      <xs:element form="qualified" minOccurs="0" name="afterId" type="xs:long"/>
+      <xs:element form="qualified" minOccurs="0" name="limit" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listCustomersOfGroupResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="page" type="tns:CustomerPage"/>
+      <xs:element form="qualified" minOccurs="0" name="page" type="tns:CustomerPage"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="CustomerPage">
@@ -76,14 +76,14 @@
   </xs:complexType>
   <xs:complexType name="listGroupsOfCustomer">
     <xs:sequence>
-      <xs:element name="customerId" type="xs:long"/>
-      <xs:element minOccurs="0" name="afterId" type="xs:long"/>
-      <xs:element minOccurs="0" name="limit" type="xs:int"/>
+      <xs:element form="qualified" name="customerId" type="xs:long"/>
+      <xs:element form="qualified" minOccurs="0" name="afterId" type="xs:long"/>
+      <xs:element form="qualified" minOccurs="0" name="limit" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listGroupsOfCustomerResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="page" type="tns:GroupPage"/>
+      <xs:element form="qualified" minOccurs="0" name="page" type="tns:GroupPage"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="GroupPage">
@@ -94,24 +94,24 @@
   </xs:complexType>
   <xs:complexType name="addCustomersToGroup">
     <xs:sequence>
-      <xs:element name="groupId" type="xs:long"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="customerId" type="xs:long"/>
+      <xs:element form="qualified" name="groupId" type="xs:long"/>
+      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="customerId" type="xs:long"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="addCustomersToGroupResponse">
     <xs:sequence>
-      <xs:element name="added" type="xs:int"/>
+      <xs:element form="qualified" name="added" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="removeCustomersFromGroup">
     <xs:sequence>
-      <xs:element name="groupId" type="xs:long"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="customerId" type="xs:long"/>
+      <xs:element form="qualified" name="groupId" type="xs:long"/>
+      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="customerId" type="xs:long"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="removeCustomersFromGroupResponse">
     <xs:sequence>
-      <xs:element name="removed" type="xs:int"/>
+      <xs:element form="qualified" name="removed" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="ErrorCode">

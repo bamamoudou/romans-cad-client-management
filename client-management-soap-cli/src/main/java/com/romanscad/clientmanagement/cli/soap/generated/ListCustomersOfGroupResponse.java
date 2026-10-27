@@ -2,7 +2,6 @@ package com.romanscad.clientmanagement.cli.soap.generated;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
 
 
@@ -16,7 +15,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="page" type="{http://clientmanagement.romanscad.com/v1}CustomerPage" minOccurs="0"/>
+ *         <element name="page" type="{http://clientmanagement.romanscad.com/v1}CustomerPage" minOccurs="0" form="qualified"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>
@@ -31,7 +30,6 @@ import jakarta.xml.bind.annotation.XmlType;
 })
 public class ListCustomersOfGroupResponse {
 
-    @XmlElement(namespace = "")
     protected CustomerPage page;
 
     /**

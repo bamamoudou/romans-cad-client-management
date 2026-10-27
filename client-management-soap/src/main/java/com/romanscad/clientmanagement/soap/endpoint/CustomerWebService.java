@@ -33,34 +33,34 @@ public class CustomerWebService {
     private CustomerService customerService;
 
     @WebMethod
-    @WebResult(name = "customer")
+    @WebResult(name = "customer", targetNamespace = SoapContract.NAMESPACE)
     public CustomerDto createCustomer(
-            @WebParam(name = "firstName") String firstName,
-            @WebParam(name = "lastName") String lastName,
-            @WebParam(name = "email") String email) throws ClientManagementFault {
+            @WebParam(name = "firstName", targetNamespace = SoapContract.NAMESPACE) String firstName,
+            @WebParam(name = "lastName", targetNamespace = SoapContract.NAMESPACE) String lastName,
+            @WebParam(name = "email", targetNamespace = SoapContract.NAMESPACE) String email) throws ClientManagementFault {
         return SoapCalls.call(() ->
                 DtoMapper.toCustomerDto(customerService.createCustomer(firstName, lastName, email)));
     }
 
     @WebMethod
-    @WebResult(name = "customer")
+    @WebResult(name = "customer", targetNamespace = SoapContract.NAMESPACE)
     public CustomerDto getCustomer(
-            @WebParam(name = "customerId") long customerId) throws ClientManagementFault {
+            @WebParam(name = "customerId", targetNamespace = SoapContract.NAMESPACE) long customerId) throws ClientManagementFault {
         return SoapCalls.call(() -> DtoMapper.toCustomerDto(customerService.getCustomer(customerId)));
     }
 
     @WebMethod
     public void deleteCustomer(
-            @WebParam(name = "customerId") long customerId) throws ClientManagementFault {
+            @WebParam(name = "customerId", targetNamespace = SoapContract.NAMESPACE) long customerId) throws ClientManagementFault {
         SoapCalls.run(() -> customerService.deleteCustomer(customerId));
     }
 
     /** Pagination par curseur : afterId et limit sont facultatifs (première page, 100 éléments). */
     @WebMethod
-    @WebResult(name = "page")
+    @WebResult(name = "page", targetNamespace = SoapContract.NAMESPACE)
     public CustomerPageDto listCustomers(
-            @WebParam(name = "afterId") Long afterId,
-            @WebParam(name = "limit") Integer limit) throws ClientManagementFault {
+            @WebParam(name = "afterId", targetNamespace = SoapContract.NAMESPACE) Long afterId,
+            @WebParam(name = "limit", targetNamespace = SoapContract.NAMESPACE) Integer limit) throws ClientManagementFault {
         return SoapCalls.call(() ->
                 DtoMapper.toCustomerPage(customerService.listCustomers(DtoMapper.toPageRequest(afterId, limit))));
     }

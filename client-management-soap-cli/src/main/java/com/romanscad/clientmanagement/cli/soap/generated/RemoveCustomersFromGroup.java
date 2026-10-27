@@ -18,8 +18,8 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="groupId" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         <element name="customerId" type="{http://www.w3.org/2001/XMLSchema}long" maxOccurs="unbounded" minOccurs="0"/>
+ *         <element name="groupId" type="{http://www.w3.org/2001/XMLSchema}long" form="qualified"/>
+ *         <element name="customerId" type="{http://www.w3.org/2001/XMLSchema}long" maxOccurs="unbounded" minOccurs="0" form="qualified"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>
@@ -35,9 +35,8 @@ import jakarta.xml.bind.annotation.XmlType;
 })
 public class RemoveCustomersFromGroup {
 
-    @XmlElement(namespace = "")
     protected long groupId;
-    @XmlElement(namespace = "", type = Long.class)
+    @XmlElement(type = Long.class)
     protected List<Long> customerId;
 
     /**
