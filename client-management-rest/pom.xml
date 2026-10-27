@@ -13,15 +13,23 @@
     <packaging>war</packaging>
     <name>Client Management - Passerelle REST (étape 3)</name>
 
-    <!-- Pas de dépendance vers core : la passerelle ne connaît QUE le contrat SOAP. -->
     <dependencies>
+        <!-- Volontairement AUCUNE dépendance sur client-management-core : la passerelle ne connaît que le
+             contrat SOAP (WSDL), exactement comme n'importe quel client externe. -->
+
+        <!-- Jakarta REST, CDI, JSON-B : fournis par WildFly (scope provided géré par le parent). -->
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
         </dependency>
+        <!-- Nécessaires à la compilation des stubs SOAP ; WildFly les fournit à l'exécution. -->
         <dependency>
             <groupId>jakarta.xml.ws</groupId>
             <artifactId>jakarta.xml.ws-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.jws</groupId>
+            <artifactId>jakarta.jws-api</artifactId>
         </dependency>
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
@@ -30,6 +38,7 @@
     </dependencies>
 
     <build>
+        <!-- Contexte de déploiement stable : http://localhost:8080/client-management-rest -->
         <finalName>client-management-rest</finalName>
     </build>
 </project>

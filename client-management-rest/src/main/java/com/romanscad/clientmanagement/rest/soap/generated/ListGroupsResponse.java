@@ -1,0 +1,59 @@
+package com.romanscad.clientmanagement.rest.soap.generated;
+
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Classe Java pour listGroupsResponse complex type.</p>
+ * 
+ * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.</p>
+ * 
+ * <pre>{@code
+ * <complexType name="listGroupsResponse">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="page" type="{http://clientmanagement.romanscad.com/v1}GroupPage" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "listGroupsResponse", propOrder = {
+    "page"
+})
+public class ListGroupsResponse {
+
+    protected GroupPage page;
+
+    /**
+     * Obtient la valeur de la propriété page.
+     * 
+     * @return
+     *     possible object is
+     *     {@link GroupPage }
+     *     
+     */
+    public GroupPage getPage() {
+        return page;
+    }
+
+    /**
+     * Définit la valeur de la propriété page.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link GroupPage }
+     *     
+     */
+    public void setPage(GroupPage value) {
+        this.page = value;
+    }
+
+}
