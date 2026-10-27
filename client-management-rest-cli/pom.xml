@@ -13,4 +13,72 @@
     <packaging>jar</packaging>
     <name>Client Management - Client REST CLI (étape 4)</name>
 
+    <properties>
+        <jakarta.json.version>2.1.3</jakarta.json.version>
+        <parsson.version>1.1.6</parsson.version>
+        <maven.shade.plugin.version>3.6.0</maven.shade.plugin.version>
+    </properties>
+
+    <dependencies>
+        <!-- Le moteur de ligne de commande (apporte aussi le core, transitivement). -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>client-management-cli-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- JSON-P : API standard Jakarta + son implémentation (Eclipse Parsson). Pas de client REST : le
+             transport est java.net.http.HttpClient, fourni par le JDK. -->
+        <dependency>
+            <groupId>jakarta.json</groupId>
+            <artifactId>jakarta.json-api</artifactId>
+            <version>${jakarta.json.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.parsson</groupId>
+            <artifactId>parsson</artifactId>
+            <version>${parsson.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- Nom stable de l'exécutable : target/client-management-rest-cli.jar -->
+        <finalName>client-management-rest-cli</finalName>
+        <plugins>
+            <!-- JAR exécutable autonome ("fat jar") : un seul fichier, lançable avec java -jar. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${maven.shade.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals><goal>shade</goal></goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                        <exclude>module-info.class</exclude>
+                                        <exclude>META-INF/versions/*/module-info.class</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <transformers>
+                                <!-- Fusionne META-INF/services : c'est par là que JSON-P retrouve Parsson. -->
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.romanscad.clientmanagement.cli.rest.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
