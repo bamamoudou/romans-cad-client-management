@@ -10,6 +10,6 @@ public class ApiExceptionMapper implements ExceptionMapper<ApiException> {
 
     @Override
     public Response toResponse(ApiException exception) {
-        return ProblemDetail.response(exception.status(), exception.getMessage(), exception.code());
+        return ProblemDetail.response(exception.status(), exception.getMessage(), exception.code(), exception.resourceId());
     }
 }

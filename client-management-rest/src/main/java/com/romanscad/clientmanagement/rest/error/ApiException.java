@@ -10,15 +10,22 @@ public final class ApiException extends RuntimeException {
 
     private final int status;
     private final String code;
+    private final Long resourceId;
 
     public ApiException(int status, String code, String message) {
-        this(status, code, message, null);
+        this(status, code, message, null, null);
     }
 
     public ApiException(int status, String code, String message, Throwable cause) {
+        this(status, code, message, cause, null);
+    }
+
+    /** @param resourceId identifiant de la ressource concernée (pour les « introuvable »), ou null */
+    public ApiException(int status, String code, String message, Throwable cause, Long resourceId) {
         super(message, cause);
         this.status = status;
         this.code = code;
+        this.resourceId = resourceId;
     }
 
     /** Code de statut HTTP. */
@@ -29,5 +36,10 @@ public final class ApiException extends RuntimeException {
     /** Code d'erreur applicatif stable, destiné aux programmes (par exemple CUSTOMER_NOT_FOUND). */
     public String code() {
         return code;
+    }
+
+    /** Identifiant de la ressource introuvable, ou null. */
+    public Long resourceId() {
+        return resourceId;
     }
 }
