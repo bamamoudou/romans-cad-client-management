@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://clientmanagement.romanscad.com/v1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="CustomerWebService" targetNamespace="http://clientmanagement.romanscad.com/v1">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://clientmanagement.romanscad.com/v1" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://clientmanagement.romanscad.com/v1" version="1.0">
+  <xs:element name="createCustomer" type="tns:createCustomer"/>
+  <xs:element name="createCustomerResponse" type="tns:createCustomerResponse"/>
+  <xs:element name="deleteCustomer" type="tns:deleteCustomer"/>
+  <xs:element name="deleteCustomerResponse" type="tns:deleteCustomerResponse"/>
+  <xs:element name="getCustomer" type="tns:getCustomer"/>
+  <xs:element name="getCustomerResponse" type="tns:getCustomerResponse"/>
+  <xs:element name="listCustomers" type="tns:listCustomers"/>
+  <xs:element name="listCustomersResponse" type="tns:listCustomersResponse"/>
+  <xs:complexType name="deleteCustomer">
+    <xs:sequence>
+      <xs:element name="customerId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteCustomerResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="ErrorDetail">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="code" type="tns:ErrorCode"/>
+      <xs:element form="qualified" minOccurs="0" name="message" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="resourceId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listCustomers">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="afterId" type="xs:long"/>
+      <xs:element minOccurs="0" name="limit" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listCustomersResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="page" type="tns:CustomerPage"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CustomerPage">
+    <xs:sequence>
+      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Customer"/>
+      <xs:element form="qualified" minOccurs="0" name="nextCursor" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element form="qualified" name="id" type="xs:long"/>
+      <xs:element form="qualified" minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="lastName" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="email" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCustomer">
+    <xs:sequence>
+      <xs:element name="customerId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getCustomerResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="customer" type="tns:Customer"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createCustomer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createCustomerResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="customer" type="tns:Customer"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ErrorCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CUSTOMER_NOT_FOUND"/>
+      <xs:enumeration value="GROUP_NOT_FOUND"/>
+      <xs:enumeration value="DUPLICATE_GROUP_NAME"/>
+      <xs:enumeration value="INVALID_REQUEST"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ClientManagementFault" nillable="true" type="tns:ErrorDetail"/>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="listCustomers">
+    <wsdl:part element="tns:listCustomers" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCustomerResponse">
+    <wsdl:part element="tns:getCustomerResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createCustomerResponse">
+    <wsdl:part element="tns:createCustomerResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createCustomer">
+    <wsdl:part element="tns:createCustomer" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listCustomersResponse">
+    <wsdl:part element="tns:listCustomersResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCustomer">
+    <wsdl:part element="tns:deleteCustomer" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCustomerResponse">
+    <wsdl:part element="tns:deleteCustomerResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCustomer">
+    <wsdl:part element="tns:getCustomer" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ClientManagementFault">
+    <wsdl:part element="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CustomerWebService">
+    <wsdl:operation name="deleteCustomer">
+      <wsdl:input message="tns:deleteCustomer" name="deleteCustomer">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteCustomerResponse" name="deleteCustomerResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listCustomers">
+      <wsdl:input message="tns:listCustomers" name="listCustomers">
+    </wsdl:input>
+      <wsdl:output message="tns:listCustomersResponse" name="listCustomersResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomer">
+      <wsdl:input message="tns:getCustomer" name="getCustomer">
+    </wsdl:input>
+      <wsdl:output message="tns:getCustomerResponse" name="getCustomerResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createCustomer">
+      <wsdl:input message="tns:createCustomer" name="createCustomer">
+    </wsdl:input>
+      <wsdl:output message="tns:createCustomerResponse" name="createCustomerResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomerWebServiceSoapBinding" type="tns:CustomerWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="deleteCustomer">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteCustomer">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteCustomerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClientManagementFault">
+        <soap:fault name="ClientManagementFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listCustomers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listCustomers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listCustomersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClientManagementFault">
+        <soap:fault name="ClientManagementFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomer">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCustomer">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCustomerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClientManagementFault">
+        <soap:fault name="ClientManagementFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createCustomer">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createCustomer">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createCustomerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClientManagementFault">
+        <soap:fault name="ClientManagementFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CustomerWebService">
+    <wsdl:port binding="tns:CustomerWebServiceSoapBinding" name="CustomerWebServicePort">
+      <soap:address location="http://localhost:8080/client-management-soap/CustomerWebService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

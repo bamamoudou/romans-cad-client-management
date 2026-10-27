@@ -1,0 +1,282 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://clientmanagement.romanscad.com/v1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="MembershipWebService" targetNamespace="http://clientmanagement.romanscad.com/v1">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://clientmanagement.romanscad.com/v1" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://clientmanagement.romanscad.com/v1" version="1.0">
+  <xs:element name="addCustomersToGroup" type="tns:addCustomersToGroup"/>
+  <xs:element name="addCustomersToGroupResponse" type="tns:addCustomersToGroupResponse"/>
+  <xs:element name="listCustomersOfGroup" type="tns:listCustomersOfGroup"/>
+  <xs:element name="listCustomersOfGroupResponse" type="tns:listCustomersOfGroupResponse"/>
+  <xs:element name="listCustomersWithGroups" type="tns:listCustomersWithGroups"/>
+  <xs:element name="listCustomersWithGroupsResponse" type="tns:listCustomersWithGroupsResponse"/>
+  <xs:element name="listGroupsOfCustomer" type="tns:listGroupsOfCustomer"/>
+  <xs:element name="listGroupsOfCustomerResponse" type="tns:listGroupsOfCustomerResponse"/>
+  <xs:element name="removeCustomersFromGroup" type="tns:removeCustomersFromGroup"/>
+  <xs:element name="removeCustomersFromGroupResponse" type="tns:removeCustomersFromGroupResponse"/>
+  <xs:complexType name="listCustomersWithGroups">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="afterId" type="xs:long"/>
+      <xs:element minOccurs="0" name="limit" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listCustomersWithGroupsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="page" type="tns:CustomerWithGroupsPage"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CustomerWithGroupsPage">
+    <xs:sequence>
+      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="item" type="tns:CustomerWithGroups"/>
+      <xs:element form="qualified" minOccurs="0" name="nextCursor" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CustomerWithGroups">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="customer" type="tns:Customer"/>
+      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="group" type="tns:Group"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element form="qualified" name="id" type="xs:long"/>
+      <xs:element form="qualified" minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="lastName" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="email" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Group">
+    <xs:sequence>
+      <xs:element form="qualified" name="id" type="xs:long"/>
+      <xs:element form="qualified" minOccurs="0" name="name" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="description" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ErrorDetail">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="code" type="tns:ErrorCode"/>
+      <xs:element form="qualified" minOccurs="0" name="message" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="resourceId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listCustomersOfGroup">
+    <xs:sequence>
+      <xs:element name="groupId" type="xs:long"/>
+      <xs:element minOccurs="0" name="afterId" type="xs:long"/>
+      <xs:element minOccurs="0" name="limit" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listCustomersOfGroupResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="page" type="tns:CustomerPage"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CustomerPage">
+    <xs:sequence>
+      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Customer"/>
+      <xs:element form="qualified" minOccurs="0" name="nextCursor" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listGroupsOfCustomer">
+    <xs:sequence>
+      <xs:element name="customerId" type="xs:long"/>
+      <xs:element minOccurs="0" name="afterId" type="xs:long"/>
+      <xs:element minOccurs="0" name="limit" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listGroupsOfCustomerResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="page" type="tns:GroupPage"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GroupPage">
+    <xs:sequence>
+      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Group"/>
+      <xs:element form="qualified" minOccurs="0" name="nextCursor" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addCustomersToGroup">
+    <xs:sequence>
+      <xs:element name="groupId" type="xs:long"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="customerId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addCustomersToGroupResponse">
+    <xs:sequence>
+      <xs:element name="added" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="removeCustomersFromGroup">
+    <xs:sequence>
+      <xs:element name="groupId" type="xs:long"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="customerId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="removeCustomersFromGroupResponse">
+    <xs:sequence>
+      <xs:element name="removed" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ErrorCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CUSTOMER_NOT_FOUND"/>
+      <xs:enumeration value="GROUP_NOT_FOUND"/>
+      <xs:enumeration value="DUPLICATE_GROUP_NAME"/>
+      <xs:enumeration value="INVALID_REQUEST"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ClientManagementFault" nillable="true" type="tns:ErrorDetail"/>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="listCustomersWithGroups">
+    <wsdl:part element="tns:listCustomersWithGroups" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listCustomersOfGroup">
+    <wsdl:part element="tns:listCustomersOfGroup" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listCustomersOfGroupResponse">
+    <wsdl:part element="tns:listCustomersOfGroupResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listGroupsOfCustomer">
+    <wsdl:part element="tns:listGroupsOfCustomer" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addCustomersToGroupResponse">
+    <wsdl:part element="tns:addCustomersToGroupResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listGroupsOfCustomerResponse">
+    <wsdl:part element="tns:listGroupsOfCustomerResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addCustomersToGroup">
+    <wsdl:part element="tns:addCustomersToGroup" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listCustomersWithGroupsResponse">
+    <wsdl:part element="tns:listCustomersWithGroupsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="removeCustomersFromGroup">
+    <wsdl:part element="tns:removeCustomersFromGroup" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ClientManagementFault">
+    <wsdl:part element="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="removeCustomersFromGroupResponse">
+    <wsdl:part element="tns:removeCustomersFromGroupResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MembershipWebService">
+    <wsdl:operation name="listCustomersWithGroups">
+      <wsdl:input message="tns:listCustomersWithGroups" name="listCustomersWithGroups">
+    </wsdl:input>
+      <wsdl:output message="tns:listCustomersWithGroupsResponse" name="listCustomersWithGroupsResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listCustomersOfGroup">
+      <wsdl:input message="tns:listCustomersOfGroup" name="listCustomersOfGroup">
+    </wsdl:input>
+      <wsdl:output message="tns:listCustomersOfGroupResponse" name="listCustomersOfGroupResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listGroupsOfCustomer">
+      <wsdl:input message="tns:listGroupsOfCustomer" name="listGroupsOfCustomer">
+    </wsdl:input>
+      <wsdl:output message="tns:listGroupsOfCustomerResponse" name="listGroupsOfCustomerResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addCustomersToGroup">
+      <wsdl:input message="tns:addCustomersToGroup" name="addCustomersToGroup">
+    </wsdl:input>
+      <wsdl:output message="tns:addCustomersToGroupResponse" name="addCustomersToGroupResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="removeCustomersFromGroup">
+      <wsdl:input message="tns:removeCustomersFromGroup" name="removeCustomersFromGroup">
+    </wsdl:input>
+      <wsdl:output message="tns:removeCustomersFromGroupResponse" name="removeCustomersFromGroupResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MembershipWebServiceSoapBinding" type="tns:MembershipWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="listCustomersWithGroups">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listCustomersWithGroups">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listCustomersWithGroupsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClientManagementFault">
+        <soap:fault name="ClientManagementFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listCustomersOfGroup">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listCustomersOfGroup">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listCustomersOfGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClientManagementFault">
+        <soap:fault name="ClientManagementFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listGroupsOfCustomer">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listGroupsOfCustomer">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listGroupsOfCustomerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClientManagementFault">
+        <soap:fault name="ClientManagementFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addCustomersToGroup">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addCustomersToGroup">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addCustomersToGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClientManagementFault">
+        <soap:fault name="ClientManagementFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="removeCustomersFromGroup">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="removeCustomersFromGroup">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="removeCustomersFromGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClientManagementFault">
+        <soap:fault name="ClientManagementFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MembershipWebService">
+    <wsdl:port binding="tns:MembershipWebServiceSoapBinding" name="MembershipWebServicePort">
+      <soap:address location="http://localhost:8080/client-management-soap/MembershipWebService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

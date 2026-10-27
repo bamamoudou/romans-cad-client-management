@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://clientmanagement.romanscad.com/v1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="GroupWebService" targetNamespace="http://clientmanagement.romanscad.com/v1">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://clientmanagement.romanscad.com/v1" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://clientmanagement.romanscad.com/v1" version="1.0">
+  <xs:element name="createGroup" type="tns:createGroup"/>
+  <xs:element name="createGroupResponse" type="tns:createGroupResponse"/>
+  <xs:element name="deleteGroup" type="tns:deleteGroup"/>
+  <xs:element name="deleteGroupResponse" type="tns:deleteGroupResponse"/>
+  <xs:element name="getGroup" type="tns:getGroup"/>
+  <xs:element name="getGroupResponse" type="tns:getGroupResponse"/>
+  <xs:element name="listGroups" type="tns:listGroups"/>
+  <xs:element name="listGroupsResponse" type="tns:listGroupsResponse"/>
+  <xs:complexType name="createGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createGroupResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="group" type="tns:Group"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Group">
+    <xs:sequence>
+      <xs:element form="qualified" name="id" type="xs:long"/>
+      <xs:element form="qualified" minOccurs="0" name="name" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="description" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ErrorDetail">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="code" type="tns:ErrorCode"/>
+      <xs:element form="qualified" minOccurs="0" name="message" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="resourceId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteGroup">
+    <xs:sequence>
+      <xs:element name="groupId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteGroupResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="listGroups">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="afterId" type="xs:long"/>
+      <xs:element minOccurs="0" name="limit" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listGroupsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="page" type="tns:GroupPage"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GroupPage">
+    <xs:sequence>
+      <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="item" type="tns:Group"/>
+      <xs:element form="qualified" minOccurs="0" name="nextCursor" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getGroup">
+    <xs:sequence>
+      <xs:element name="groupId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getGroupResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="group" type="tns:Group"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ErrorCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CUSTOMER_NOT_FOUND"/>
+      <xs:enumeration value="GROUP_NOT_FOUND"/>
+      <xs:enumeration value="DUPLICATE_GROUP_NAME"/>
+      <xs:enumeration value="INVALID_REQUEST"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ClientManagementFault" nillable="true" type="tns:ErrorDetail"/>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="createGroup">
+    <wsdl:part element="tns:createGroup" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listGroupsResponse">
+    <wsdl:part element="tns:listGroupsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getGroup">
+    <wsdl:part element="tns:getGroup" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getGroupResponse">
+    <wsdl:part element="tns:getGroupResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createGroupResponse">
+    <wsdl:part element="tns:createGroupResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteGroup">
+    <wsdl:part element="tns:deleteGroup" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteGroupResponse">
+    <wsdl:part element="tns:deleteGroupResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listGroups">
+    <wsdl:part element="tns:listGroups" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ClientManagementFault">
+    <wsdl:part element="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="GroupWebService">
+    <wsdl:operation name="createGroup">
+      <wsdl:input message="tns:createGroup" name="createGroup">
+    </wsdl:input>
+      <wsdl:output message="tns:createGroupResponse" name="createGroupResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteGroup">
+      <wsdl:input message="tns:deleteGroup" name="deleteGroup">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteGroupResponse" name="deleteGroupResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listGroups">
+      <wsdl:input message="tns:listGroups" name="listGroups">
+    </wsdl:input>
+      <wsdl:output message="tns:listGroupsResponse" name="listGroupsResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getGroup">
+      <wsdl:input message="tns:getGroup" name="getGroup">
+    </wsdl:input>
+      <wsdl:output message="tns:getGroupResponse" name="getGroupResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ClientManagementFault" name="ClientManagementFault">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GroupWebServiceSoapBinding" type="tns:GroupWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createGroup">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createGroup">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClientManagementFault">
+        <soap:fault name="ClientManagementFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteGroup">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteGroup">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClientManagementFault">
+        <soap:fault name="ClientManagementFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listGroups">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listGroups">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listGroupsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClientManagementFault">
+        <soap:fault name="ClientManagementFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getGroup">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getGroup">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClientManagementFault">
+        <soap:fault name="ClientManagementFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GroupWebService">
+    <wsdl:port binding="tns:GroupWebServiceSoapBinding" name="GroupWebServicePort">
+      <soap:address location="http://localhost:8080/client-management-soap/GroupWebService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
